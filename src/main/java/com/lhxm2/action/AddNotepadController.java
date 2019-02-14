@@ -25,7 +25,7 @@ public class AddNotepadController {
 
     /**
      * @function 点击贴纸获取自带贴纸
-     * @author 琚高举
+     *
      */
     @RequestMapping("/getSysChartlet")
     public Map<String,Object> getChartlet(){
@@ -39,7 +39,7 @@ public class AddNotepadController {
 
     /**
      * @function 选中贴纸后关联用户
-     * @author 琚高举
+     *
      */
     @RequestMapping("/selectmine/{state}/{chartletid}")
     public Map<String,Object> selectMine(@PathVariable Integer chartletid,@PathVariable Integer state, HttpSession session){
@@ -67,7 +67,7 @@ public class AddNotepadController {
 
     /**
      * @function 删除贴纸(如果有关联用户,删除关联表数据)
-     * @author 琚高举
+     *
      */
     @RequestMapping("/delChartlet/{chartletid}")
     public Map<String,Object> delChartlet(@PathVariable Integer chartletid,HttpSession session){
