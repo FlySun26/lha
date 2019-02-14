@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+    <!-- 链接数据库的jar包的完整路径，一定要注意跟自己的仓库路径一致 ，注意修改  -->
+  <classPathEntry location="F:\千峰Java\jar包\mysql\mysql-connector-java-5.0.8-bin.jar" ></classPathEntry>
+  <context id="context1" >
+    <!-- 实现序列化接口 -->
+    <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+	<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+	</commentGenerator>
+	  <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                    connectionURL="jdbc:mysql://39.96.74.48:3306/nonamehhhhh?characterEncoding=utf-8"
+                    userId="root"
+                    password="root" />
+	  <!-- 生成POJO类的位置 -->
+    <javaModelGenerator targetPackage="com.lhxm2.pojo" targetProject="src/main/java" />
+	  <!-- mapper映射文件生成的位置 -->
+    <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources" />
+	  <!-- mapper接口生成的位置 -->
+    <javaClientGenerator targetPackage="com.lhxm2.dao" targetProject="src/main/java" type="XMLMAPPER" />
+	  <!-- 指定数据库表  domainObjectName实体的名称-->
+    <!--<table  tableName="adimg" domainObjectName="Adimg"></table>
+      <table  tableName="bgimg" domainObjectName="Bgimg"></table>
+      <table  tableName="chartlet" domainObjectName="Chartlet"></table>
+      <table  tableName="dongtai" domainObjectName="Dongtai"></table>
+      <table  tableName="dongtai_pic" domainObjectName="DongtaiPic"></table>
+      <table  tableName="focus" domainObjectName="Focus"></table>
+
+      <table  tableName="fontstyle" domainObjectName="FontStyle"></table>
+      <table  tableName="ha_muban_chartlet" domainObjectName="HaMubanChartlet"></table>
+      <table  tableName="ha_muban_penimg" domainObjectName="HaMubanPenimg"></table>
+      <table  tableName="ha_muban_text" domainObjectName="HaMubanText"></table>
+      <table  tableName="handaccount" domainObjectName="HandAccount"></table>
+      <table  tableName="like" domainObjectName="Like"></table>
+
+      <table  tableName="muban" domainObjectName="Muban"></table>
+      <table  tableName="pen" domainObjectName="Pen"></table>
+      <table  tableName="pinglun" domainObjectName="Pinglun"></table>
+      <table  tableName="role" domainObjectName="Role"></table>
+      <table  tableName="shoucang" domainObjectName="Shoucang"></table>
+      <table  tableName="tongzhi" domainObjectName="Tongzhi"></table>
+
+      <table  tableName="user" domainObjectName="User"></table>
+      <table  tableName="user_bgimg" domainObjectName="UserBgimg"></table>
+      <table  tableName="user_chartlet" domainObjectName="UserChartlet"></table>
+      <table  tableName="user_muban" domainObjectName="UserMuban"></table>
+      <table  tableName="user_pen" domainObjectName="UserPen"></table>
+      <table  tableName="zhangben" domainObjectName="Zhangben"></table>-->
+      <!--<table  tableName="zhangben" domainObjectName="Zhangben1"></table>
+      <table  tableName="shoucang" domainObjectName="Shoucang1"></table>
+      <table  tableName="user" domainObjectName="User1"></table>
+      <table  tableName="zb_pinglun" domainObjectName="ZbPinglun"></table>
+      <table  tableName="zb_like" domainObjectName="ZbLike"></table>-->
+      <table  tableName="muban" domainObjectName="Muban1"></table>
+  </context>
+</generatorConfiguration>

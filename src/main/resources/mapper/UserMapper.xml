@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhxm2.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.lhxm2.pojo.User">
+    <id column="u_id" jdbcType="INTEGER" property="uId" />
+    <result column="u_password" jdbcType="VARCHAR" property="uPassword" />
+    <result column="u_nickname" jdbcType="VARCHAR" property="uNickname" />
+    <result column="u_headimg" jdbcType="VARCHAR" property="uHeadimg" />
+    <result column="u_sign" jdbcType="VARCHAR" property="uSign" />
+    <result column="u_tel" jdbcType="VARCHAR" property="uTel" />
+    <result column="u_sex" jdbcType="VARCHAR" property="uSex" />
+    <result column="u_state" jdbcType="INTEGER" property="uState" />
+    <result column="r_id" jdbcType="INTEGER" property="rId" />
+    <result column="u_likenum" jdbcType="INTEGER" property="uLikenum" />
+  </resultMap>
+  <resultMap id="FindFunsMap" type="com.lhxm2.pojo.User">
+    <id column="u_id" jdbcType="INTEGER" property="uId" />
+    <result column="u_nickname" jdbcType="VARCHAR" property="uNickname" />
+    <result column="u_headimg" jdbcType="VARCHAR" property="uHeadimg" />
+    <result column="u_sign" jdbcType="VARCHAR" property="uSign" />
+    <result column="u_tel" jdbcType="VARCHAR" property="uTel" />
+    <result column="u_sex" jdbcType="VARCHAR" property="uSex" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    u_id, u_password, u_nickname, u_headimg, u_sign, u_tel, u_sex, u_state, r_id, u_likenum
+  </sql>
+  <select id="selectByExample" parameterType="com.lhxm2.pojo.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where u_id = #{uId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where u_id = #{uId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lhxm2.pojo.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lhxm2.pojo.User">
+    insert into user (u_id, u_password, u_nickname,
+      u_headimg, u_sign, u_tel,
+      u_sex, u_state, r_id,
+      u_likenum)
+    values (#{uId,jdbcType=INTEGER}, #{uPassword,jdbcType=VARCHAR}, #{uNickname,jdbcType=VARCHAR},
+      #{uHeadimg,jdbcType=VARCHAR}, #{uSign,jdbcType=VARCHAR}, #{uTel,jdbcType=VARCHAR},
+      #{uSex,jdbcType=VARCHAR}, #{uState,jdbcType=INTEGER}, #{rId,jdbcType=INTEGER},
+      #{uLikenum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lhxm2.pojo.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uId != null">
+        u_id,
+      </if>
+      <if test="uPassword != null">
+        u_password,
+      </if>
+      <if test="uNickname != null">
+        u_nickname,
+      </if>
+      <if test="uHeadimg != null">
+        u_headimg,
+      </if>
+      <if test="uSign != null">
+        u_sign,
+      </if>
+      <if test="uTel != null">
+        u_tel,
+      </if>
+      <if test="uSex != null">
+        u_sex,
+      </if>
+      <if test="uState != null">
+        u_state,
+      </if>
+      <if test="rId != null">
+        r_id,
+      </if>
+      <if test="uLikenum != null">
+        u_likenum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uId != null">
+        #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="uPassword != null">
+        #{uPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="uNickname != null">
+        #{uNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="uHeadimg != null">
+        #{uHeadimg,jdbcType=VARCHAR},
+      </if>
+      <if test="uSign != null">
+        #{uSign,jdbcType=VARCHAR},
+      </if>
+      <if test="uTel != null">
+        #{uTel,jdbcType=VARCHAR},
+      </if>
+      <if test="uSex != null">
+        #{uSex,jdbcType=VARCHAR},
+      </if>
+      <if test="uState != null">
+        #{uState,jdbcType=INTEGER},
+      </if>
+      <if test="rId != null">
+        #{rId,jdbcType=INTEGER},
+      </if>
+      <if test="uLikenum != null">
+        #{uLikenum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lhxm2.pojo.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.uId != null">
+        u_id = #{record.uId,jdbcType=INTEGER},
+      </if>
+      <if test="record.uPassword != null">
+        u_password = #{record.uPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uNickname != null">
+        u_nickname = #{record.uNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uHeadimg != null">
+        u_headimg = #{record.uHeadimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uSign != null">
+        u_sign = #{record.uSign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uTel != null">
+        u_tel = #{record.uTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uSex != null">
+        u_sex = #{record.uSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uState != null">
+        u_state = #{record.uState,jdbcType=INTEGER},
+      </if>
+      <if test="record.rId != null">
+        r_id = #{record.rId,jdbcType=INTEGER},
+      </if>
+      <if test="record.uLikenum != null">
+        u_likenum = #{record.uLikenum,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set u_id = #{record.uId,jdbcType=INTEGER},
+    u_password = #{record.uPassword,jdbcType=VARCHAR},
+    u_nickname = #{record.uNickname,jdbcType=VARCHAR},
+    u_headimg = #{record.uHeadimg,jdbcType=VARCHAR},
+    u_sign = #{record.uSign,jdbcType=VARCHAR},
+    u_tel = #{record.uTel,jdbcType=VARCHAR},
+    u_sex = #{record.uSex,jdbcType=VARCHAR},
+    u_state = #{record.uState,jdbcType=INTEGER},
+    r_id = #{record.rId,jdbcType=INTEGER},
+    u_likenum = #{record.uLikenum,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lhxm2.pojo.User">
+    update user
+    <set>
+      <if test="uPassword != null">
+        u_password = #{uPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="uNickname != null">
+        u_nickname = #{uNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="uHeadimg != null">
+        u_headimg = #{uHeadimg,jdbcType=VARCHAR},
+      </if>
+      <if test="uSign != null">
+        u_sign = #{uSign,jdbcType=VARCHAR},
+      </if>
+      <if test="uTel != null">
+        u_tel = #{uTel,jdbcType=VARCHAR},
+      </if>
+      <if test="uSex != null">
+        u_sex = #{uSex,jdbcType=VARCHAR},
+      </if>
+      <if test="uState != null">
+        u_state = #{uState,jdbcType=INTEGER},
+      </if>
+      <if test="rId != null">
+        r_id = #{rId,jdbcType=INTEGER},
+      </if>
+      <if test="uLikenum != null">
+        u_likenum = #{uLikenum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where u_id = #{uId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lhxm2.pojo.User">
+    update user
+    set u_password = #{uPassword,jdbcType=VARCHAR},
+      u_nickname = #{uNickname,jdbcType=VARCHAR},
+      u_headimg = #{uHeadimg,jdbcType=VARCHAR},
+      u_sign = #{uSign,jdbcType=VARCHAR},
+      u_tel = #{uTel,jdbcType=VARCHAR},
+      u_sex = #{uSex,jdbcType=VARCHAR},
+      u_state = #{uState,jdbcType=INTEGER},
+      r_id = #{rId,jdbcType=INTEGER},
+      u_likenum = #{uLikenum,jdbcType=INTEGER}
+    where u_id = #{uId,jdbcType=INTEGER}
+  </update>
+    <!--淳于永晨创建,用于查看当前用户的所有funs-->
+    <select id="findfuns" resultMap="FindFunsMap">
+      SELECT u.`u_id`,u.`u_nickname`,u.`u_headimg`,
+      u.`u_sign`,u.`u_tel`,u.`u_sex`
+      FROM focus f,user u
+      WHERE u.u_id=f.`f_focus`
+      AND f.`f_befocus` = #{uid}
+  </select>
+  <select id="findfocus" resultMap="FindFunsMap">
+      SELECT u.`u_id`,u.`u_nickname`,u.`u_headimg`,
+      u.`u_sign`,u.`u_tel`,u.`u_sex`
+      FROM focus f,user u
+      WHERE u.u_id=f.`f_befocus`
+      AND f.`f_focus` = #{uid}
+  </select>
+</mapper>

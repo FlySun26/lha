@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhxm2.dao.MubanMapper">
+  <resultMap id="BaseResultMap" type="com.lhxm2.pojo.Muban">
+    <id column="mu_id" jdbcType="INTEGER" property="muId" />
+    <result column="bg_id" jdbcType="INTEGER" property="bgId" />
+    <result column="mu_name" jdbcType="VARCHAR" property="muName" />
+    <result column="mu_url" jdbcType="VARCHAR" property="muUrl" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    mu_id, bg_id, mu_name, mu_url
+  </sql>
+  <select id="selectByExample" parameterType="com.lhxm2.pojo.MubanExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from muban
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from muban
+    where mu_id = #{muId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from muban
+    where mu_id = #{muId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lhxm2.pojo.MubanExample">
+    delete from muban
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lhxm2.pojo.Muban">
+    insert into muban (mu_id, bg_id, mu_name, 
+      mu_url)
+    values (#{muId,jdbcType=INTEGER}, #{bgId,jdbcType=INTEGER}, #{muName,jdbcType=VARCHAR}, 
+      #{muUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lhxm2.pojo.Muban">
+    insert into muban
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="muId != null">
+        mu_id,
+      </if>
+      <if test="bgId != null">
+        bg_id,
+      </if>
+      <if test="muName != null">
+        mu_name,
+      </if>
+      <if test="muUrl != null">
+        mu_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="muId != null">
+        #{muId,jdbcType=INTEGER},
+      </if>
+      <if test="bgId != null">
+        #{bgId,jdbcType=INTEGER},
+      </if>
+      <if test="muName != null">
+        #{muName,jdbcType=VARCHAR},
+      </if>
+      <if test="muUrl != null">
+        #{muUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lhxm2.pojo.MubanExample" resultType="java.lang.Long">
+    select count(*) from muban
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update muban
+    <set>
+      <if test="record.muId != null">
+        mu_id = #{record.muId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bgId != null">
+        bg_id = #{record.bgId,jdbcType=INTEGER},
+      </if>
+      <if test="record.muName != null">
+        mu_name = #{record.muName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.muUrl != null">
+        mu_url = #{record.muUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update muban
+    set mu_id = #{record.muId,jdbcType=INTEGER},
+    bg_id = #{record.bgId,jdbcType=INTEGER},
+    mu_name = #{record.muName,jdbcType=VARCHAR},
+    mu_url = #{record.muUrl,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lhxm2.pojo.Muban">
+    update muban
+    <set>
+      <if test="bgId != null">
+        bg_id = #{bgId,jdbcType=INTEGER},
+      </if>
+      <if test="muName != null">
+        mu_name = #{muName,jdbcType=VARCHAR},
+      </if>
+      <if test="muUrl != null">
+        mu_url = #{muUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mu_id = #{muId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lhxm2.pojo.Muban">
+    update muban
+    set bg_id = #{bgId,jdbcType=INTEGER},
+      mu_name = #{muName,jdbcType=VARCHAR},
+      mu_url = #{muUrl,jdbcType=VARCHAR}
+    where mu_id = #{muId,jdbcType=INTEGER}
+  </update>
+</mapper>

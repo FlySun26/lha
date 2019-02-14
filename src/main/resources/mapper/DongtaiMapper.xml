@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhxm2.dao.DongtaiMapper">
+  <resultMap id="BaseResultMap" type="com.lhxm2.pojo.Dongtai">
+    <id column="dt_id" jdbcType="INTEGER" property="dtId" />
+    <result column="u_id" jdbcType="INTEGER" property="uId" />
+    <result column="ha_id" jdbcType="INTEGER" property="haId" />
+    <result column="dt_text" jdbcType="VARCHAR" property="dtText" />
+    <result column="dt_address" jdbcType="VARCHAR" property="dtAddress" />
+    <result column="dt_looknum" jdbcType="INTEGER" property="dtLooknum" />
+    <result column="dt_likenum" jdbcType="INTEGER" property="dtLikenum" />
+    <result column="dt_pinglunnum" jdbcType="INTEGER" property="dtPinglunnum" />
+    <result column="dt_zhuanfanum" jdbcType="INTEGER" property="dtZhuanfanum" />
+    <result column="dt_time" jdbcType="DATE" property="dtTime" />
+    <result column="dt_shcnum" jdbcType="INTEGER" property="dtShcnum" />
+    <result column="dt_role" jdbcType="INTEGER" property="dtRole" />
+  </resultMap>
+
+  <select id="getAll" resultMap="BaseResultMap">
+    SELECT
+      <include refid="Base_Column_List"/>
+    FROM dongtai
+  </select>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    dt_id, u_id, ha_id, dt_text, dt_address, dt_looknum, dt_likenum, dt_pinglunnum, dt_zhuanfanum, 
+    dt_time, dt_shcnum, dt_role
+  </sql>
+  <select id="selectByExample" parameterType="com.lhxm2.pojo.DongtaiExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dongtai
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dongtai
+    where dt_id = #{dtId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dongtai
+    where dt_id = #{dtId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lhxm2.pojo.DongtaiExample">
+    delete from dongtai
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="dtId" parameterType="com.lhxm2.pojo.Dongtai">
+    insert into dongtai (dt_id, u_id, ha_id, 
+      dt_text, dt_address, dt_looknum, 
+      dt_likenum, dt_pinglunnum, dt_zhuanfanum, 
+      dt_time, dt_shcnum, dt_role
+      )
+    values (#{dtId,jdbcType=INTEGER}, #{uId,jdbcType=INTEGER}, #{haId,jdbcType=INTEGER}, 
+      #{dtText,jdbcType=VARCHAR}, #{dtAddress,jdbcType=VARCHAR}, #{dtLooknum,jdbcType=INTEGER}, 
+      #{dtLikenum,jdbcType=INTEGER}, #{dtPinglunnum,jdbcType=INTEGER}, #{dtZhuanfanum,jdbcType=INTEGER}, 
+      #{dtTime,jdbcType=DATE}, #{dtShcnum,jdbcType=INTEGER}, #{dtRole,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lhxm2.pojo.Dongtai">
+    insert into dongtai
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dtId != null">
+        dt_id,
+      </if>
+      <if test="uId != null">
+        u_id,
+      </if>
+      <if test="haId != null">
+        ha_id,
+      </if>
+      <if test="dtText != null">
+        dt_text,
+      </if>
+      <if test="dtAddress != null">
+        dt_address,
+      </if>
+      <if test="dtLooknum != null">
+        dt_looknum,
+      </if>
+      <if test="dtLikenum != null">
+        dt_likenum,
+      </if>
+      <if test="dtPinglunnum != null">
+        dt_pinglunnum,
+      </if>
+      <if test="dtZhuanfanum != null">
+        dt_zhuanfanum,
+      </if>
+      <if test="dtTime != null">
+        dt_time,
+      </if>
+      <if test="dtShcnum != null">
+        dt_shcnum,
+      </if>
+      <if test="dtRole != null">
+        dt_role,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dtId != null">
+        #{dtId,jdbcType=INTEGER},
+      </if>
+      <if test="uId != null">
+        #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="haId != null">
+        #{haId,jdbcType=INTEGER},
+      </if>
+      <if test="dtText != null">
+        #{dtText,jdbcType=VARCHAR},
+      </if>
+      <if test="dtAddress != null">
+        #{dtAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="dtLooknum != null">
+        #{dtLooknum,jdbcType=INTEGER},
+      </if>
+      <if test="dtLikenum != null">
+        #{dtLikenum,jdbcType=INTEGER},
+      </if>
+      <if test="dtPinglunnum != null">
+        #{dtPinglunnum,jdbcType=INTEGER},
+      </if>
+      <if test="dtZhuanfanum != null">
+        #{dtZhuanfanum,jdbcType=INTEGER},
+      </if>
+      <if test="dtTime != null">
+        #{dtTime,jdbcType=DATE},
+      </if>
+      <if test="dtShcnum != null">
+        #{dtShcnum,jdbcType=INTEGER},
+      </if>
+      <if test="dtRole != null">
+        #{dtRole,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lhxm2.pojo.DongtaiExample" resultType="java.lang.Long">
+    select count(*) from dongtai
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update dongtai
+    <set>
+      <if test="record.dtId != null">
+        dt_id = #{record.dtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.uId != null">
+        u_id = #{record.uId,jdbcType=INTEGER},
+      </if>
+      <if test="record.haId != null">
+        ha_id = #{record.haId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dtText != null">
+        dt_text = #{record.dtText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dtAddress != null">
+        dt_address = #{record.dtAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dtLooknum != null">
+        dt_looknum = #{record.dtLooknum,jdbcType=INTEGER},
+      </if>
+      <if test="record.dtLikenum != null">
+        dt_likenum = #{record.dtLikenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.dtPinglunnum != null">
+        dt_pinglunnum = #{record.dtPinglunnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.dtZhuanfanum != null">
+        dt_zhuanfanum = #{record.dtZhuanfanum,jdbcType=INTEGER},
+      </if>
+      <if test="record.dtTime != null">
+        dt_time = #{record.dtTime,jdbcType=DATE},
+      </if>
+      <if test="record.dtShcnum != null">
+        dt_shcnum = #{record.dtShcnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.dtRole != null">
+        dt_role = #{record.dtRole,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update dongtai
+    set dt_id = #{record.dtId,jdbcType=INTEGER},
+      u_id = #{record.uId,jdbcType=INTEGER},
+      ha_id = #{record.haId,jdbcType=INTEGER},
+      dt_text = #{record.dtText,jdbcType=VARCHAR},
+      dt_address = #{record.dtAddress,jdbcType=VARCHAR},
+      dt_looknum = #{record.dtLooknum,jdbcType=INTEGER},
+      dt_likenum = #{record.dtLikenum,jdbcType=INTEGER},
+      dt_pinglunnum = #{record.dtPinglunnum,jdbcType=INTEGER},
+      dt_zhuanfanum = #{record.dtZhuanfanum,jdbcType=INTEGER},
+      dt_time = #{record.dtTime,jdbcType=DATE},
+      dt_shcnum = #{record.dtShcnum,jdbcType=INTEGER},
+      dt_role = #{record.dtRole,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lhxm2.pojo.Dongtai">
+    update dongtai
+    <set>
+      <if test="uId != null">
+        u_id = #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="haId != null">
+        ha_id = #{haId,jdbcType=INTEGER},
+      </if>
+      <if test="dtText != null">
+        dt_text = #{dtText,jdbcType=VARCHAR},
+      </if>
+      <if test="dtAddress != null">
+        dt_address = #{dtAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="dtLooknum != null">
+        dt_looknum = #{dtLooknum,jdbcType=INTEGER},
+      </if>
+      <if test="dtLikenum != null">
+        dt_likenum = #{dtLikenum,jdbcType=INTEGER},
+      </if>
+      <if test="dtPinglunnum != null">
+        dt_pinglunnum = #{dtPinglunnum,jdbcType=INTEGER},
+      </if>
+      <if test="dtZhuanfanum != null">
+        dt_zhuanfanum = #{dtZhuanfanum,jdbcType=INTEGER},
+      </if>
+      <if test="dtTime != null">
+        dt_time = #{dtTime,jdbcType=DATE},
+      </if>
+      <if test="dtShcnum != null">
+        dt_shcnum = #{dtShcnum,jdbcType=INTEGER},
+      </if>
+      <if test="dtRole != null">
+        dt_role = #{dtRole,jdbcType=INTEGER},
+      </if>
+    </set>
+    where dt_id = #{dtId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lhxm2.pojo.Dongtai">
+    update dongtai
+    set u_id = #{uId,jdbcType=INTEGER},
+      ha_id = #{haId,jdbcType=INTEGER},
+      dt_text = #{dtText,jdbcType=VARCHAR},
+      dt_address = #{dtAddress,jdbcType=VARCHAR},
+      dt_looknum = #{dtLooknum,jdbcType=INTEGER},
+      dt_likenum = #{dtLikenum,jdbcType=INTEGER},
+      dt_pinglunnum = #{dtPinglunnum,jdbcType=INTEGER},
+      dt_zhuanfanum = #{dtZhuanfanum,jdbcType=INTEGER},
+      dt_time = #{dtTime,jdbcType=DATE},
+      dt_shcnum = #{dtShcnum,jdbcType=INTEGER},
+      dt_role = #{dtRole,jdbcType=INTEGER}
+    where dt_id = #{dtId,jdbcType=INTEGER}
+  </update>
+</mapper>

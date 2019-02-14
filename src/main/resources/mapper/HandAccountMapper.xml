@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhxm2.dao.HandAccountMapper">
+  <resultMap id="BaseResultMap" type="com.lhxm2.pojo.HandAccount">
+    <id column="ha_id" jdbcType="INTEGER" property="haId" />
+    <result column="u_id" jdbcType="INTEGER" property="uId" />
+    <result column="bg_id" jdbcType="INTEGER" property="bgId" />
+    <result column="ha_state" jdbcType="INTEGER" property="haState" />
+    <result column="ha_name" jdbcType="VARCHAR" property="haName" />
+    <result column="zb_id" jdbcType="INTEGER" property="zbId" />
+    <result column="ha_time" jdbcType="INTEGER" property="haTime" />
+  </resultMap>
+
+  <!--根据uid查询-->
+  <select id="getHandaccount" resultMap="BaseResultMap">
+    SELECT
+      <include refid="Base_Column_List"/>
+    FROM handaccount
+    WHERE u_id IN
+    <foreach collection="list" item="uId" separator="," open="(" close=")">
+      #{uId}
+    </foreach>
+  </select>
+
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ha_id, u_id, bg_id, ha_state, ha_name, zb_id, ha_time
+  </sql>
+  <select id="selectByExample" parameterType="com.lhxm2.pojo.HandAccountExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from handaccount
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from handaccount
+    where ha_id = #{haId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from handaccount
+    where ha_id = #{haId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lhxm2.pojo.HandAccountExample">
+    delete from handaccount
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lhxm2.pojo.HandAccount">
+    insert into handaccount (ha_id, u_id, bg_id, 
+      ha_state, ha_name, zb_id, 
+      ha_time)
+    values (#{haId,jdbcType=INTEGER}, #{uId,jdbcType=INTEGER}, #{bgId,jdbcType=INTEGER}, 
+      #{haState,jdbcType=INTEGER}, #{haName,jdbcType=VARCHAR}, #{zbId,jdbcType=INTEGER}, 
+      #{haTime,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lhxm2.pojo.HandAccount">
+    insert into handaccount
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="haId != null">
+        ha_id,
+      </if>
+      <if test="uId != null">
+        u_id,
+      </if>
+      <if test="bgId != null">
+        bg_id,
+      </if>
+      <if test="haState != null">
+        ha_state,
+      </if>
+      <if test="haName != null">
+        ha_name,
+      </if>
+      <if test="zbId != null">
+        zb_id,
+      </if>
+      <if test="haTime != null">
+        ha_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="haId != null">
+        #{haId,jdbcType=INTEGER},
+      </if>
+      <if test="uId != null">
+        #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="bgId != null">
+        #{bgId,jdbcType=INTEGER},
+      </if>
+      <if test="haState != null">
+        #{haState,jdbcType=INTEGER},
+      </if>
+      <if test="haName != null">
+        #{haName,jdbcType=VARCHAR},
+      </if>
+      <if test="zbId != null">
+        #{zbId,jdbcType=INTEGER},
+      </if>
+      <if test="haTime != null">
+        #{haTime,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lhxm2.pojo.HandAccountExample" resultType="java.lang.Long">
+    select count(*) from handaccount
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update handaccount
+    <set>
+      <if test="record.haId != null">
+        ha_id = #{record.haId,jdbcType=INTEGER},
+      </if>
+      <if test="record.uId != null">
+        u_id = #{record.uId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bgId != null">
+        bg_id = #{record.bgId,jdbcType=INTEGER},
+      </if>
+      <if test="record.haState != null">
+        ha_state = #{record.haState,jdbcType=INTEGER},
+      </if>
+      <if test="record.haName != null">
+        ha_name = #{record.haName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zbId != null">
+        zb_id = #{record.zbId,jdbcType=INTEGER},
+      </if>
+      <if test="record.haTime != null">
+        ha_time = #{record.haTime,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update handaccount
+    set ha_id = #{record.haId,jdbcType=INTEGER},
+      u_id = #{record.uId,jdbcType=INTEGER},
+      bg_id = #{record.bgId,jdbcType=INTEGER},
+      ha_state = #{record.haState,jdbcType=INTEGER},
+      ha_name = #{record.haName,jdbcType=VARCHAR},
+      zb_id = #{record.zbId,jdbcType=INTEGER},
+      ha_time = #{record.haTime,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lhxm2.pojo.HandAccount">
+    update handaccount
+    <set>
+      <if test="uId != null">
+        u_id = #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="bgId != null">
+        bg_id = #{bgId,jdbcType=INTEGER},
+      </if>
+      <if test="haState != null">
+        ha_state = #{haState,jdbcType=INTEGER},
+      </if>
+      <if test="haName != null">
+        ha_name = #{haName,jdbcType=VARCHAR},
+      </if>
+      <if test="zbId != null">
+        zb_id = #{zbId,jdbcType=INTEGER},
+      </if>
+      <if test="haTime != null">
+        ha_time = #{haTime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ha_id = #{haId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lhxm2.pojo.HandAccount">
+    update handaccount
+    set u_id = #{uId,jdbcType=INTEGER},
+      bg_id = #{bgId,jdbcType=INTEGER},
+      ha_state = #{haState,jdbcType=INTEGER},
+      ha_name = #{haName,jdbcType=VARCHAR},
+      zb_id = #{zbId,jdbcType=INTEGER},
+      ha_time = #{haTime,jdbcType=INTEGER}
+    where ha_id = #{haId,jdbcType=INTEGER}
+  </update>
+</mapper>

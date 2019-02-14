@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhxm2.dao.HaMubanChartletMapper">
+  <resultMap id="BaseResultMap" type="com.lhxm2.pojo.HaMubanChartlet">
+    <id column="hmc_id" jdbcType="INTEGER" property="hmcId" />
+    <result column="ha_id" jdbcType="INTEGER" property="haId" />
+    <result column="mu_id" jdbcType="INTEGER" property="muId" />
+    <result column="c_id" jdbcType="INTEGER" property="cId" />
+    <result column="hmc_x" jdbcType="INTEGER" property="hmcX" />
+    <result column="hmc_y" jdbcType="INTEGER" property="hmcY" />
+    <result column="hmc_width" jdbcType="INTEGER" property="hmcWidth" />
+    <result column="hmc_height" jdbcType="INTEGER" property="hmcHeight" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    hmc_id, ha_id, mu_id, c_id, hmc_x, hmc_y, hmc_width, hmc_height
+  </sql>
+  <select id="selectByExample" parameterType="com.lhxm2.pojo.HaMubanChartletExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ha_muban_chartlet
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ha_muban_chartlet
+    where hmc_id = #{hmcId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ha_muban_chartlet
+    where hmc_id = #{hmcId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lhxm2.pojo.HaMubanChartletExample">
+    delete from ha_muban_chartlet
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lhxm2.pojo.HaMubanChartlet">
+    insert into ha_muban_chartlet (hmc_id, ha_id, mu_id, 
+      c_id, hmc_x, hmc_y, hmc_width, 
+      hmc_height)
+    values (#{hmcId,jdbcType=INTEGER}, #{haId,jdbcType=INTEGER}, #{muId,jdbcType=INTEGER}, 
+      #{cId,jdbcType=INTEGER}, #{hmcX,jdbcType=INTEGER}, #{hmcY,jdbcType=INTEGER}, #{hmcWidth,jdbcType=INTEGER}, 
+      #{hmcHeight,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lhxm2.pojo.HaMubanChartlet">
+    insert into ha_muban_chartlet
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hmcId != null">
+        hmc_id,
+      </if>
+      <if test="haId != null">
+        ha_id,
+      </if>
+      <if test="muId != null">
+        mu_id,
+      </if>
+      <if test="cId != null">
+        c_id,
+      </if>
+      <if test="hmcX != null">
+        hmc_x,
+      </if>
+      <if test="hmcY != null">
+        hmc_y,
+      </if>
+      <if test="hmcWidth != null">
+        hmc_width,
+      </if>
+      <if test="hmcHeight != null">
+        hmc_height,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hmcId != null">
+        #{hmcId,jdbcType=INTEGER},
+      </if>
+      <if test="haId != null">
+        #{haId,jdbcType=INTEGER},
+      </if>
+      <if test="muId != null">
+        #{muId,jdbcType=INTEGER},
+      </if>
+      <if test="cId != null">
+        #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="hmcX != null">
+        #{hmcX,jdbcType=INTEGER},
+      </if>
+      <if test="hmcY != null">
+        #{hmcY,jdbcType=INTEGER},
+      </if>
+      <if test="hmcWidth != null">
+        #{hmcWidth,jdbcType=INTEGER},
+      </if>
+      <if test="hmcHeight != null">
+        #{hmcHeight,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lhxm2.pojo.HaMubanChartletExample" resultType="java.lang.Long">
+    select count(*) from ha_muban_chartlet
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ha_muban_chartlet
+    <set>
+      <if test="record.hmcId != null">
+        hmc_id = #{record.hmcId,jdbcType=INTEGER},
+      </if>
+      <if test="record.haId != null">
+        ha_id = #{record.haId,jdbcType=INTEGER},
+      </if>
+      <if test="record.muId != null">
+        mu_id = #{record.muId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cId != null">
+        c_id = #{record.cId,jdbcType=INTEGER},
+      </if>
+      <if test="record.hmcX != null">
+        hmc_x = #{record.hmcX,jdbcType=INTEGER},
+      </if>
+      <if test="record.hmcY != null">
+        hmc_y = #{record.hmcY,jdbcType=INTEGER},
+      </if>
+      <if test="record.hmcWidth != null">
+        hmc_width = #{record.hmcWidth,jdbcType=INTEGER},
+      </if>
+      <if test="record.hmcHeight != null">
+        hmc_height = #{record.hmcHeight,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ha_muban_chartlet
+    set hmc_id = #{record.hmcId,jdbcType=INTEGER},
+      ha_id = #{record.haId,jdbcType=INTEGER},
+      mu_id = #{record.muId,jdbcType=INTEGER},
+      c_id = #{record.cId,jdbcType=INTEGER},
+      hmc_x = #{record.hmcX,jdbcType=INTEGER},
+      hmc_y = #{record.hmcY,jdbcType=INTEGER},
+      hmc_width = #{record.hmcWidth,jdbcType=INTEGER},
+      hmc_height = #{record.hmcHeight,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lhxm2.pojo.HaMubanChartlet">
+    update ha_muban_chartlet
+    <set>
+      <if test="haId != null">
+        ha_id = #{haId,jdbcType=INTEGER},
+      </if>
+      <if test="muId != null">
+        mu_id = #{muId,jdbcType=INTEGER},
+      </if>
+      <if test="cId != null">
+        c_id = #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="hmcX != null">
+        hmc_x = #{hmcX,jdbcType=INTEGER},
+      </if>
+      <if test="hmcY != null">
+        hmc_y = #{hmcY,jdbcType=INTEGER},
+      </if>
+      <if test="hmcWidth != null">
+        hmc_width = #{hmcWidth,jdbcType=INTEGER},
+      </if>
+      <if test="hmcHeight != null">
+        hmc_height = #{hmcHeight,jdbcType=INTEGER},
+      </if>
+    </set>
+    where hmc_id = #{hmcId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lhxm2.pojo.HaMubanChartlet">
+    update ha_muban_chartlet
+    set ha_id = #{haId,jdbcType=INTEGER},
+      mu_id = #{muId,jdbcType=INTEGER},
+      c_id = #{cId,jdbcType=INTEGER},
+      hmc_x = #{hmcX,jdbcType=INTEGER},
+      hmc_y = #{hmcY,jdbcType=INTEGER},
+      hmc_width = #{hmcWidth,jdbcType=INTEGER},
+      hmc_height = #{hmcHeight,jdbcType=INTEGER}
+    where hmc_id = #{hmcId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhxm2.dao.PinglunMapper">
+  <resultMap id="BaseResultMap" type="com.lhxm2.pojo.Pinglun">
+    <id column="pl_id" jdbcType="INTEGER" property="plId" />
+    <result column="u_id" jdbcType="INTEGER" property="uId" />
+    <result column="dt_id" jdbcType="INTEGER" property="dtId" />
+    <result column="pl_upid" jdbcType="INTEGER" property="plUpid" />
+    <result column="pl_text" jdbcType="VARCHAR" property="plText" />
+    <result column="pl_time" jdbcType="TIMESTAMP" property="plTime" />
+  </resultMap>
+
+  <!--根据动态id查询所有评论-->
+  <select id="getAllPinlun" resultMap="BaseResultMap">
+    SELECT
+      <include refid="Base_Column_List"/>
+    FROM pinglun
+    where dt_id IN
+    <foreach collection="list" item="dtId" separator="," open="(" close=")">
+      #{dtId}
+    </foreach>
+  </select>
+
+  <select id="selectByDtId" resultMap="BaseResultMap">
+    SELECT
+      <include refid="Base_Column_List"/>
+    FROM pinglun
+    where dt_id=#{dtId}
+  </select>
+
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    pl_id, u_id, dt_id, pl_upid, pl_text, pl_time
+  </sql>
+  <select id="selectByExample" parameterType="com.lhxm2.pojo.PinglunExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pinglun
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from pinglun
+    where pl_id = #{plId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from pinglun
+    where pl_id = #{plId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lhxm2.pojo.PinglunExample">
+    delete from pinglun
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lhxm2.pojo.Pinglun">
+    insert into pinglun (pl_id, u_id, dt_id, 
+      pl_upid, pl_text, pl_time
+      )
+    values (#{plId,jdbcType=INTEGER}, #{uId,jdbcType=INTEGER}, #{dtId,jdbcType=INTEGER}, 
+      #{plUpid,jdbcType=INTEGER}, #{plText,jdbcType=VARCHAR}, #{plTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lhxm2.pojo.Pinglun">
+    insert into pinglun
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="plId != null">
+        pl_id,
+      </if>
+      <if test="uId != null">
+        u_id,
+      </if>
+      <if test="dtId != null">
+        dt_id,
+      </if>
+      <if test="plUpid != null">
+        pl_upid,
+      </if>
+      <if test="plText != null">
+        pl_text,
+      </if>
+      <if test="plTime != null">
+        pl_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="plId != null">
+        #{plId,jdbcType=INTEGER},
+      </if>
+      <if test="uId != null">
+        #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="dtId != null">
+        #{dtId,jdbcType=INTEGER},
+      </if>
+      <if test="plUpid != null">
+        #{plUpid,jdbcType=INTEGER},
+      </if>
+      <if test="plText != null">
+        #{plText,jdbcType=VARCHAR},
+      </if>
+      <if test="plTime != null">
+        #{plTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lhxm2.pojo.PinglunExample" resultType="java.lang.Long">
+    select count(*) from pinglun
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update pinglun
+    <set>
+      <if test="record.plId != null">
+        pl_id = #{record.plId,jdbcType=INTEGER},
+      </if>
+      <if test="record.uId != null">
+        u_id = #{record.uId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dtId != null">
+        dt_id = #{record.dtId,jdbcType=INTEGER},
+      </if>
+      <if test="record.plUpid != null">
+        pl_upid = #{record.plUpid,jdbcType=INTEGER},
+      </if>
+      <if test="record.plText != null">
+        pl_text = #{record.plText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plTime != null">
+        pl_time = #{record.plTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update pinglun
+    set pl_id = #{record.plId,jdbcType=INTEGER},
+      u_id = #{record.uId,jdbcType=INTEGER},
+      dt_id = #{record.dtId,jdbcType=INTEGER},
+      pl_upid = #{record.plUpid,jdbcType=INTEGER},
+      pl_text = #{record.plText,jdbcType=VARCHAR},
+      pl_time = #{record.plTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lhxm2.pojo.Pinglun">
+    update pinglun
+    <set>
+      <if test="uId != null">
+        u_id = #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="dtId != null">
+        dt_id = #{dtId,jdbcType=INTEGER},
+      </if>
+      <if test="plUpid != null">
+        pl_upid = #{plUpid,jdbcType=INTEGER},
+      </if>
+      <if test="plText != null">
+        pl_text = #{plText,jdbcType=VARCHAR},
+      </if>
+      <if test="plTime != null">
+        pl_time = #{plTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where pl_id = #{plId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lhxm2.pojo.Pinglun">
+    update pinglun
+    set u_id = #{uId,jdbcType=INTEGER},
+      dt_id = #{dtId,jdbcType=INTEGER},
+      pl_upid = #{plUpid,jdbcType=INTEGER},
+      pl_text = #{plText,jdbcType=VARCHAR},
+      pl_time = #{plTime,jdbcType=TIMESTAMP}
+    where pl_id = #{plId,jdbcType=INTEGER}
+  </update>
+
+
+  <resultMap id="pinglunMap" type="com.lhxm2.dto.PinglunDTO">
+    <result column="pl_id" property="plId"/>
+    <result column="u_id" property="uId"/>
+    <result column="u_nickname" property="fNickname"/>
+    <result column="pl_text" property="plText"/>
+    <result column="pl_id_c" property="plIdCh"/>
+    <result column="u_id_c" property="uIdCh"/>
+    <result column="u_nickname_c" property="NicknameCh"/>
+    <result column="pl_text_c" property="plTextCh"/>
+    <result column="pl_time" property="pldate" />
+
+  </resultMap>
+  <resultMap id="CompressPlMap" type="com.lhxm2.dto.PinglunConpressDTO">
+    <result column="u_id" property="uId"/>
+    <result column="pl_text" property="plText"/>
+    <result column="pl_time" property="plTime"/>
+    <result column="u_nickname" property="uNickname"/>
+  </resultMap>
+  <select id="findPingLunDTO" parameterType="integer" resultMap="pinglunMap">
+    SELECT p1.pl_id,p1.u_id,u1.u_nickname,p1.pl_text,p2.pl_id pl_id_c,p2.u_id u_id_c,u2.u_nickname u_nickname_c,p2.pl_text pl_text_c ,p2.pl_time FROM pinglun p1  LEFT OUTER JOIN pinglun p2 ON p2.pl_upid =p1.pl_id INNER JOIN `user` u1 ON p1.u_id=u1.u_id INNER JOIN `user` u2 ON p2.u_id=u2.u_id   WHERE p1.dt_id=#{dongTaiId} ORDER BY pl_id asc
+  </select>
+  <select id="findCompressPl" resultMap="CompressPlMap" parameterType="integer">
+        SELECT p.u_id,p.pl_text,pl_time,u.u_nickname FROM pinglun p INNER JOIN `user` u ON p.u_id=u.u_id WHERE pl_upid=0 and dt_id=#{dtId}
+    </select>
+</mapper>
