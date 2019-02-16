@@ -2,7 +2,7 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration >
     <!-- 链接数据库的jar包的完整路径，一定要注意跟自己的仓库路径一致 ，注意修改  -->
-  <classPathEntry location="F:\千峰Java\jar包\mysql\mysql-connector-java-5.0.8-bin.jar" ></classPathEntry>
+  <classPathEntry location="D:\apache-maven-3.6.0-repository\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar" ></classPathEntry>
   <context id="context1" >
     <!-- 实现序列化接口 -->
     <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
@@ -12,9 +12,9 @@
 	</commentGenerator>
 	  <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
     <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                    connectionURL="jdbc:mysql://39.96.74.48:3306/nonamehhhhh?characterEncoding=utf-8"
+                    connectionURL="jdbc:mysql://47.94.201.5:3306/checkbook?characterEncoding=utf-8"
                     userId="root"
-                    password="root" />
+                    password="Abc123!_" />
 	  <!-- 生成POJO类的位置 -->
     <javaModelGenerator targetPackage="com.lhxm2.pojo" targetProject="src/main/java" />
 	  <!-- mapper映射文件生成的位置 -->
@@ -54,6 +54,7 @@
       <table  tableName="user" domainObjectName="User1"></table>
       <table  tableName="zb_pinglun" domainObjectName="ZbPinglun"></table>
       <table  tableName="zb_like" domainObjectName="ZbLike"></table>-->
-      <table  tableName="muban" domainObjectName="Muban1"></table>
+      <!--<table  tableName="muban" domainObjectName="Muban1"></table>-->
+      <table  tableName="token" domainObjectName="Token"></table>
   </context>
 </generatorConfiguration>
