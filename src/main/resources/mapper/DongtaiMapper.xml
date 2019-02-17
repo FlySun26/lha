@@ -210,7 +210,14 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <!--根据UID查询个人动态-->
+  <select id="uidDongtai" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dongtai
+    where u_id = #{uid,jdbcType=INTEGER}
+  </select>
+    <update id="updateByExampleSelective" parameterType="map">
     update dongtai
     <set>
       <if test="record.dtId != null">

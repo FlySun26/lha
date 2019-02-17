@@ -5,6 +5,7 @@ import com.lhxm2.pojo.Dongtai;
 import com.lhxm2.pojo.DongtaiPic;
 import com.lhxm2.service.DongtaiPicService;
 import com.lhxm2.service.DongtaiService;
+import com.lhxm2.util.R;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -143,6 +144,21 @@ public class DongtaiController {
     @RequestMapping("/world/dongtaiInfo")
     public Map<String,Object> dongtaiInfo(Integer dtId){
         Map map = dongtaiService.getDongtai(1);
+        if(map!=null){
+            map.put("code",0);
+            map.put("msg","success");
+        }else {
+            map.put("code",1);
+            map.put("msg","default");
+        }
+        return map;
+    }
+
+//    根据UID查询动态
+
+    @RequestMapping("/world/uiddongtai")
+    public Map uiddongtai(Integer uid) {
+        Map map = dongtaiService.uidDongtai(1);
         if(map!=null){
             map.put("code",0);
             map.put("msg","success");

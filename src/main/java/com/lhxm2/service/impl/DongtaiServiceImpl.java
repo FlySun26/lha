@@ -4,6 +4,7 @@ import com.lhxm2.dao.*;
 import com.lhxm2.dto.DongTaiDTO;
 import com.lhxm2.pojo.*;
 import com.lhxm2.service.DongtaiService;
+import com.lhxm2.util.R;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -152,6 +153,30 @@ public class DongtaiServiceImpl implements DongtaiService {
         return map;
     }
 
+    @Override
+    public Map uidDongtai(Integer uid) {
+        List<Dongtai> dongtais = dongtaiMapper.uidDongtai(uid);
+        List<Map> uiddongtai = new ArrayList<>();
+        for (Dongtai dongtai : dongtais) {
+            DongtaiPic dongtaiPic = dongtaiPicMapper.selectByDtId(dongtai.getDtId());
+            List<Pinglun> pinglun = pinglunMapper.selectByDtId(dongtai.getDtId());
+            HandAccount handAccount = handAccountMapper.selectByPrimaryKey(dongtai.getHaId());
+            Bgimg bgimg = bgimgMapper.selectByPrimaryKey(handAccount.getBgId());
+            HaMubanText haMubanText = haMubanTextMapper.selectByPrimaryKey(handAccount.getHaId());
+
+            Map map = new HashMap();
+            map.put("dongtai",dongtai);
+            map.put("dongtaiPic",dongtaiPic);
+            map.put("pinglun",pinglun);
+            map.put("handAccount",handAccount);
+            map.put("bgimg",bgimg);
+            map.put("haMubanText",haMubanText);
+            uiddongtai.add(map);
+        }
+        Map map = new HashMap();
+        map.put("uiddongtai", uiddongtai);
+        return map;
+    }
 
 
 }

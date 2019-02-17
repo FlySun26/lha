@@ -2,7 +2,9 @@ package com.lhxm2.service;
 
 import com.lhxm2.dto.DongTaiDTO;
 import com.lhxm2.pojo.Dongtai;
+import com.lhxm2.util.R;
 
+import java.util.List;
 import java.util.Map;
 
 public interface DongtaiService {
@@ -28,5 +30,7 @@ public interface DongtaiService {
      * @return
      */
     Map getDongtai(Integer dtId);
+
+    Map uidDongtai(Integer uid);
 
 }

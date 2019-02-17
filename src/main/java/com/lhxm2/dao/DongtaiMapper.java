@@ -35,4 +35,7 @@ public interface DongtaiMapper {
      */
     List<Dongtai> getAll();
 
+    List<Dongtai> uidDongtai(Integer uid);
+
+
 }
