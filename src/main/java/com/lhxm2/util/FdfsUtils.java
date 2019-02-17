@@ -61,7 +61,7 @@ public class FdfsUtils {
      */
     public static void main(String[] args) {
         try {
-            String upload = upload("D:/1545724034591.jpg");
+            String upload = upload("D:/20190217172906.jpg");
             System.out.println(upload);
         } catch (IOException e) {
             e.printStackTrace();
