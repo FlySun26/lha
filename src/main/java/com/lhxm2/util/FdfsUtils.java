@@ -40,7 +40,7 @@ public class FdfsUtils {
      * @throws MyException
      */
     public static String upload(String localFilename,String fileExtName) throws IOException, MyException {
-        return upload("39.96.74.48",localFilename,fileExtName);
+        return upload("47.94.201.5",localFilename,fileExtName);
 
     }
 
@@ -52,7 +52,7 @@ public class FdfsUtils {
      * @throws MyException
      */
     public static String upload(String localFilename) throws IOException, MyException {
-        return upload("39.96.74.48",localFilename,"jpg");
+        return upload("47.94.201.5",localFilename,"jpg");
     }
 
     /**
@@ -61,7 +61,7 @@ public class FdfsUtils {
      */
     public static void main(String[] args) {
         try {
-            String upload = upload("D:/609637799.jpg");
+            String upload = upload("D:/1545724034591.jpg");
             System.out.println(upload);
         } catch (IOException e) {
             e.printStackTrace();
