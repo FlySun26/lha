@@ -66,7 +66,7 @@ public class DtPinglunController {
         response.setContentType("application/json;charset=UTF-8");
         //h5跨域
         response.setHeader("Access-Control-Allow-Origin","*");
-        R r = pinglunService.fingPingLun(dongtaiId);
+        R r = pinglunService.fingPingLun(1);
         List list = (List) r.get("list");
         String json  = JSON.toJSONString(list);
         PrintWriter pw = null;

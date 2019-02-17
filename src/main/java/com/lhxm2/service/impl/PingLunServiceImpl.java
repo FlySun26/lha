@@ -33,6 +33,7 @@ package com.lhxm2.service.impl;//
 //             不见满街漂亮妹，哪个归得程序员？
 
 import com.lhxm2.dao.PinglunMapper;
+import com.lhxm2.dao.UserMapper;
 import com.lhxm2.dto.PinglunConpressDTO;
 import com.lhxm2.dto.PinglunDTO;
 import com.lhxm2.pojo.Pinglun;
@@ -50,6 +51,8 @@ import java.util.List;
 public class PingLunServiceImpl implements PinglunService {
     @Resource
     PinglunMapper pinglunMapper;
+    @Resource
+    UserMapper userMapper;
     @Override
     public R savePingLun(Pinglun pinglun) {
         int i = pinglunMapper.insertSelective(pinglun);
@@ -59,6 +62,11 @@ public class PingLunServiceImpl implements PinglunService {
     @Override
     public R fingPingLun(Integer DongtaiId) {
         List<PinglunDTO> pinglunDTOList = pinglunMapper.findPingLunDTO(DongtaiId);
+        for (PinglunDTO pinglunDTO : pinglunDTOList) {
+            pinglunDTO.setfSrc(userMapper.selectByPrimaryKey(pinglunDTO.getuId()).getuHeadimg());
+            pinglunDTO.setcSrc(userMapper.selectByPrimaryKey(pinglunDTO.getuIdCh()).getuHeadimg());
+
+        }
 
         return R.ok().put("list", pinglunDTOList);
     }

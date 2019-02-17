@@ -41,10 +41,12 @@ public class PinglunDTO {
     private Integer plId;//父评论ID
     private Integer uId;//父评论用户ID
     private String fNickname;//父评论昵称
+    private String fSrc;//父评论用户头像
     private String plText;//父评论内容
     private Integer plIdCh;//子评论ID
     private Integer uIdCh;//子评论用户ID
     private String NicknameCh;//子评论用户昵称
+    private String cSrc;//子评论用户头像
     private String plTextCh;//子评论内容
     private Date pldate;//评论时间
 
@@ -52,14 +54,18 @@ public class PinglunDTO {
     }
 
 
-    public PinglunDTO(Integer plId, Integer uId, String fNickname, String plText, Integer plIdCh, Integer uIdCh, String nicknameCh, String plTextCh, Date pldate) {
+
+
+    public PinglunDTO(Integer plId, Integer uId, String fNickname, String fSrc, String plText, Integer plIdCh, Integer uIdCh, String nicknameCh, String cSrc, String plTextCh, Date pldate) {
         this.plId = plId;
         this.uId = uId;
         this.fNickname = fNickname;
+        this.fSrc = fSrc;
         this.plText = plText;
         this.plIdCh = plIdCh;
         this.uIdCh = uIdCh;
         NicknameCh = nicknameCh;
+        this.cSrc = cSrc;
         this.plTextCh = plTextCh;
         this.pldate = pldate;
     }
@@ -136,16 +142,34 @@ public class PinglunDTO {
         this.pldate = pldate;
     }
 
+    public String getfSrc() {
+        return fSrc;
+    }
+
+    public void setfSrc(String fSrc) {
+        this.fSrc = fSrc;
+    }
+
+    public String getcSrc() {
+        return cSrc;
+    }
+
+    public void setcSrc(String cSrc) {
+        this.cSrc = cSrc;
+    }
+
     @Override
     public String toString() {
         return "PinglunDTO{" +
                 "plId=" + plId +
                 ", uId=" + uId +
                 ", fNickname='" + fNickname + '\'' +
+                ", fSrc='" + fSrc + '\'' +
                 ", plText='" + plText + '\'' +
                 ", plIdCh=" + plIdCh +
                 ", uIdCh=" + uIdCh +
                 ", NicknameCh='" + NicknameCh + '\'' +
+                ", cSrc='" + cSrc + '\'' +
                 ", plTextCh='" + plTextCh + '\'' +
                 ", pldate=" + pldate +
                 '}';
