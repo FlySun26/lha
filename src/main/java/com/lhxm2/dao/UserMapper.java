@@ -4,7 +4,6 @@ import com.lhxm2.pojo.User;
 import com.lhxm2.pojo.UserExample;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 @Mapper
@@ -34,4 +33,6 @@ public interface UserMapper {
     List<User> findfuns(Map map);
 
     List<User> findfocus(Map map);
+
+    User findByPhone(String phone);
 }

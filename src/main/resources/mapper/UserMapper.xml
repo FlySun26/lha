@@ -128,6 +128,9 @@
       <if test="uId != null">
         u_id,
       </if>
+      <if test="uLoginName != null">
+        u_loginname,
+      </if>
       <if test="uPassword != null">
         u_password,
       </if>
@@ -159,6 +162,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="uId != null">
         #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="uLoginName != null">
+        #{uLoginName,jdbcType=INTEGER},
       </if>
       <if test="uPassword != null">
         #{uPassword,jdbcType=VARCHAR},
@@ -309,5 +315,10 @@
       FROM focus f,user u
       WHERE u.u_id=f.`f_befocus`
       AND f.`f_focus` = #{uid}
+  </select>
+  <!--根据phone查询用户-->
+  <select id="findByPhone" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from user where u_loginname=#{uLoginName}
   </select>
 </mapper>

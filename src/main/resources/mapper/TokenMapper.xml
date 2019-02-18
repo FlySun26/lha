@@ -148,6 +148,13 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+
+  <!--查询token-->
+  <select id="findByToken" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include> from token
+    where totken=#{totken}
+  </select>
+
   <update id="updateByExampleSelective" parameterType="map">
     update token
     <set>

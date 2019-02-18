@@ -2,10 +2,13 @@ package com.lhxm2.dao;
 
 import com.lhxm2.pojo.Token;
 import com.lhxm2.pojo.TokenExample;
-import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import java.util.List;
 
+@Mapper
 public interface TokenMapper {
+
     long countByExample(TokenExample example);
 
     int deleteByExample(TokenExample example);
@@ -27,4 +30,6 @@ public interface TokenMapper {
     int updateByPrimaryKeySelective(Token record);
 
     int updateByPrimaryKey(Token record);
+
+    Token findByToken(String token);
 }

@@ -24,6 +24,7 @@ public class User implements Serializable {
     private Integer uLikenum;
 
     private static final long serialVersionUID = 1L;
+    private String uLoginName;
 
     public Integer getuId() {
         return uId;
@@ -103,5 +104,15 @@ public class User implements Serializable {
 
     public void setuLikenum(Integer uLikenum) {
         this.uLikenum = uLikenum;
+    }
+
+    public void setuLoginName(String uLoginName) {
+        this.uLoginName = uLoginName;
+    }
+
+
+
+    public String getuLoginName() {
+        return uLoginName;
     }
 }
